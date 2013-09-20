@@ -37,10 +37,10 @@ var myMajor = "Web Design";
 var textEditor = "Sublime";
 var myZip = 20854;
 var pi = 3.14159;
-var totalCost = 10.50;
+var totalCost = "$10.50";
 var lightSwitch = true;
-var superman = true;
-console.log(myEmail, myMajor, textEditor, myZip, pi, totalCost, lightSwitch, superman)
+var supermanCanFly = true;
+console.log(myEmail, myMajor, textEditor, myZip, pi, totalCost, lightSwitch, supermanCanFly);
 
 // Problem 3) Use the typeof operator to determine the data type of each variable like so.
 	// console.log(typeof myEmail);
@@ -55,7 +55,7 @@ console.log(typeof myZip);
 console.log(typeof pi); 
 console.log(typeof totalCost); 
 console.log(typeof lightSwitch);
-console.log(typeof superman);
+console.log(typeof supermanCanFly);
 
 // Problem 4) Create string variables to store the following string values.
 // Send all variables to the console.
@@ -72,21 +72,21 @@ console.log(dogSentence, htmlLink, javascriptSentence);
 // Send this array to the console.
 
 var myArray = ["Web Dynamic", "Input Validation", "Create Search Engine"]
-console.log(myArray)
+console.log(myArray);
 
 // Problem 6) Send each item of the last array to the console. 
 // If your array variable is myArray then you would write
 	// console.log(myArray[0])
 	// console.log(myArray[1])
 	// and so on…
-console.log(myArray[0])
-console.log(myArray[1])
-console.log(myArray[2])
+console.log(myArray[0]);
+console.log(myArray[1]);
+console.log(myArray[2]);
 
-// Problem 7) Use the yourArrayVariable.length property to determine the size of your array.*
+// Problem 7) Use the yourArrayVariable.length property to determine the size of your array.
 // Send the result to the console.
-myArray.length
-console.log(myArray.length)
+var arraySize = myArray.length;
+console.log(arraySize);
 
 
 // Problem 8) Create a function named "clickMe".
@@ -96,7 +96,7 @@ console.log(myArray.length)
 	// a similar way to how we did it in class for the currency conversion
 	// calculator.
 
-document.getElementById('clickMe').onclick = function () {
+document.getElementById('clickMe').onclick = function clickMe() {
 	console.log("Leave me alone!");
 }
 	
