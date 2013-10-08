@@ -45,24 +45,22 @@ console.log( 5 / 5 );
 	//
 	// You can review Rebecca Murphey's post on how to avoid using "else if" by going here: http://rmurphey.com/blog/2012/12/10/js-conditionals/
 
+//JG: The indentation of the curly brackets was off so I ran your code through http://jsbeautifier.org/
+// Aside from that the logic looks solid.
+
 var cookieThief;
-cookieThief='Dad';
-if (cookieThief==='Dad')
-  {
-  console.log("He’s going to be in trouble!");
-  }
-else if (cookieThief==='Mom')
-  {
-  console.log("No big deal.");
-  }
-else if (cookieThief==='Me')
-  {
-  console.log("No more cookies for you.");
-  }
-else
-  {
-  console.log("Johnny did it.");
-  }
+
+cookieThief = 'Dad';
+
+if (cookieThief === 'Dad') {
+    console.log("He’s going to be in trouble!");
+} else if (cookieThief === 'Mom') {
+    console.log("No big deal.");
+} else if (cookieThief === 'Me') {
+    console.log("No more cookies for you.");
+} else {
+    console.log("Johnny did it.");
+}
 
 // Problem 3
 	// Boolean conditions
@@ -78,17 +76,19 @@ else
 	//
 	// Examples of Boolean conditions can be found here on Ex. 2.1: http://eloquentjavascript.net/chapter2.html
 
+//JG: It wouldn't hurt to give this default values. They are undefined as is.
+
 var day;
 var time;
 var room;
-if ((day==='Thursday') && (time==='6:30') && (room==='HU317'))
-  {
-  console.log("You are in CA276");
-  }
- else
-  {
-  console.log("You are in another class");
-  }
+
+//JG: Also auto-indented this using jsbeautifier.org and removed superfluous parentheses.
+
+if (day === 'Thursday' && time === '6:30' && room === 'HU317') {
+    console.log("You are in CA276");
+} else {
+    console.log("You are in another class");
+}
 
 // Problem 4
 	// Bart Simpson detention problem
@@ -112,19 +112,24 @@ if ((day==='Thursday') && (time==='6:30') && (room==='HU317'))
 	// console.log(bartSimpson);
 
 var bartSimpson = '';
-var i;
-i=0;
+var i = 0; //JG: Put spaces around operators, and be consistent with where you set your defaults.
+
 while (i < 10) {
-i++;
-bartSimpson = bartSimpson + 'I will not make fun of the teacher using JavaScript code.';
+	i++;
+	bartSimpson += 'I will not make fun of the teacher using JavaScript code.';
 };
+
 console.log(bartSimpson);
 
 // Problem 5
 	// Do the same as you did in question 4 but write it as a for loop.
 
-var bartSimpson = '';
-for (var i = 0; i < 10; i++) {
-bartSimpson = bartSimpson + 'I will not make fun of the teacher using JavaScript code.';
+//JG: No need to declare variables a 2nd time since you declare them above.
+
+bartSimpson = '';
+
+for (i = 0; i < 10; i++) {
+	bartSimpson += 'I will not make fun of the teacher using JavaScript code.';
 };
+
 console.log(bartSimpson);
