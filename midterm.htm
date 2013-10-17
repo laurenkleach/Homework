@@ -3,8 +3,9 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="UTF-8">
 	<title>midterm</title>
-	<link rel="stylesheet" type="text/css" href="./midterm-files/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="./midterm-files/styles.css">
+	<!-- Commenting these out since they are throwing errors in the console -->
+	<!-- <link rel="stylesheet" type="text/css" href="./midterm-files/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="./midterm-files/styles.css"> -->
 </head>
 <body>
 	<section class="container">
@@ -87,20 +88,22 @@
 
 		var bestRockvilleRestaurants = ["Chili\'s", "TGIF", "Silver Diner"];
 
-		var expectedSalary = "$62,228";
+		//JG: I'd personally go with a number type, but I can see why you chose a string.
+		// var expectedSalary = "$62,228";
+		var expectedSalary = 62228;
 
 		
 		// Problem 2
 
-		var drinkPrice = (20 * 1.25);
+		var drinkPrice = 20 * 1.25;
 
-		var costSmartphone = (400 * .85);
+		var costSmartphone = 400 * 0.85;
 
-		var subSandwhichCost = (5 * 4);
+		var subSandwhichCost = 5 * 4;
 
-		var dinnerSplit = (75 / 5); 
+		var dinnerSplit = 75 / 5; 
 
-		var productNumber = (0.1 * 0.2);
+		var productNumber = 0.1 * 0.2;
 
 		var productRounded = productNumber.toFixed(2);
 
@@ -108,27 +111,36 @@
 
 		// Problem 3
 		var editor = 'Sublime';
-		if (editor === 'Eclipse')
-		{
+		//JG: In JavaScript it's preferrable to have curly brackets start on the right
+
+		if (editor === 'Eclipse') {
 			console.log("Java developer");
-		}
-		else if (editor === 'Aptana Studio')
-		{
+		} else if (editor === 'Aptana Studio') {
 			console.log("Web developer");
-		}
-		else if (editor === 'Sublime')
-		{
+		} else if (editor === 'Sublime') {
 			console.log("I am awesome");
-		}
-		else if (editor === 'Notepad')
-		{
+		} else if (editor === 'Notepad') {
 			console.log("Wrong editor");
 		}
 
+		//JG: Here's an example where having curly brackets on the left can hurt you
 
+		function createShape(name, width, height) {
+			// Return a JavaScript object
+			//JG: What happens if you align the curly brackets vertically in the return statement below?
+			return {
+					'name': name,
+					'width': width,
+					'height': height
+				};
+		}
+
+		// //JG: What does the console return?
+		console.log('Create shape test:', createShape('square', 10, 5));
 
 		// Problem 4
 		var i; 
+
 		for (i = 5; i < 16; i++) {
 			console.log(i);
 		};
@@ -136,23 +148,35 @@
 
 		// Problem 5
 		
-		var myaverage = function average(num1, num2, num3) {
+		var myAverage = function average(num1, num2, num3) {
 			var value = 0;
-			if (typeof num2 !=="number" || typeof num2 !=="number" || typeof num3 !=="number")
-			{
-				value = "NaN";
+
+			if (typeof num2 !== "number" || typeof num2 !== "number" || typeof num3 !== "number") {
+				
+				//JG: NaN is a built-in value so no single quotes are needed
+				value = NaN;
+				
 				return value;
 			}
-			
-			value = (num1 + num2 + num3)/3; 
-				return value;
-		};
 
+			value = (num1 + num2 + num3) / 3;
+
+			return value;
+		};
 		
 
 
 		// Problem 6
 		//The hardest part about learning JavaScript would probably be understanding passing and returning arguments, in complicated situations, such as functions within functions or passing functions in functions. Sometimes it can become so complicated in trying to understand where a value is being returned to, or what the scope of the value you are trying to return is. I can normally understand if I take it step by step. but it can be very time-consuming doing so. Also, when there is a minor syntax error, and not obviously an error, it can be difficult trying to determine why or where the error is occuring. Other than this, so far I find that I understand most of the Javascript we have learned so far, and I find it to be very logical and straightfoward. 
+
+		//JG: Closures are a beast for sure. Understanding them is somewhat critical these days since jQuery relies so heavily on them. I've even noticed some other languages start to adopt the closure concept (e.g. passing functions as arguments to other functions) because they are so powerful. JavaScript is quite unique in this aspect. One thing that may help in understanding them is to write code with nested functions. In other words, an outer function, an inner function, and an inner inner function. Scope variables to each of the functions and use console.log statements to see what's going on.
+
+		//JG: Debugging is a bit of an art. The console.log statement is helpful for determining where code is breaking. You can also use the debugger statement to stop code dead in its tracks. You can resume when you have confirmed that you want the code to keep running.
+
+		// debugger;
+
+		//JG: This podcast episode helped me get more acquainted with debugging in Firefox, Chrome, Safari, and Opera. Sadly, it does a feel a bit dated now (Firefox 3.6!), but it may be somewhat useful.
+		// http://jqueryfordesigners.com/debugging-tools/
 
 	</script>
 
