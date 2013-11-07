@@ -15,7 +15,7 @@
 // addMedal = This takes a string as a parameter and adds it to the array of medals. It does not return anything.
 // Problem 1
 // Create the object above by setting the properties one by one.
-var introduction = 'idk';
+
 var athlete1 = {};
 athlete1.name = 'John';
 athlete1.height = '6\'1\"';
@@ -23,22 +23,19 @@ athlete1.age = 19;
 athlete1.countryOfOrigin = 'Brazil';
 athlete1.medals = ['gold', 'silver'];
 athlete1.isOlympian = true;
-athlete1.introduce = function (name, countryOfOrigin) {
-    return ('Hello my name is ' + name + ' and I am from ' + countryOfOrigin);
+athlete1.introduce = function() {
+	//JG: Use the this scope to refer to properties within the object
+	return 'Hello my name is ' + this.name + ' and I am from ' + this.countryOfOrigin;
 }
-console.log(athlete1.introduce(athlete1.name, athlete1.countryOfOrigin));
 
-athlete1.addMedal = function (medals) {
-    medals.push('bronze');
-    return medals;
+athlete1.addMedal = function(medal) {
+	//JG: Same here. Use the this prefix to reference inner properties.
+	this.medals.push(medal);
+	return this.medals;
 };
-console.log(athlete1.addMedal(athlete1.medals));
 
-
-// athlete.foo = "bar"
-// athlete.method = function () {
-
-// }
+console.log(athlete1.introduce());
+console.log(athlete1.addMedal('bronze'));
 
 
 
@@ -52,16 +49,17 @@ athlete1['age'] = 19;
 athlete1['countryOfOrigin'] = 'Brazil';
 athlete1['medals'] = ['gold', 'silver'];
 athlete1['isOlympian'] = true;
-athlete1['introduce'] = function (name, countryOfOrigin) {
-    return ('Hello my name is ' + name + ' and I am from ' + countryOfOrigin);
+athlete1['introduce'] = function() {
+	return 'Hello my name is ' + this['name'] + ' and I am from ' + this['countryOfOrigin'];
 };
-console.log(athlete1.introduce( athlete1.name, athlete1.countryOfOrigin ));
 
-athlete1['addMedal'] = function (medals) {
-    medals.push('bronze');
-    return medals;
+athlete1['addMedal'] = function(medal) {
+	this.medals.push(medal);
+	return this.medals;
 };
-console.log(athlete1.addMedal( athlete1.medals ));
+
+console.log(athlete1.introduce());
+console.log(athlete1.addMedal('bronze'));
 
 // athlete['foo'] = "bar"
 // athlete['method'] = function () {
@@ -74,24 +72,24 @@ console.log(athlete1.addMedal( athlete1.medals ));
 // Create the same object using ONE object literal
 
 var athlete1 = {
-    name: 'John',
-    height: '6\'1\"',
-    age: 19,
-    countryOfOrigin: 'Brazil',
-    medals: ['gold', 'silver'],
-    isOlympian: true,
-    introduce: function (name, countryOfOrigin) {
-        return ('Hello my name is ' + name + ' and I am from ' + countryOfOrigin);
-    },
+	name: 'John',
+	height: '6\'1\"',
+	age: 19,
+	countryOfOrigin: 'Brazil',
+	medals: ['gold', 'silver'],
+	isOlympian: true,
+	introduce: function() {
+		return 'Hello my name is ' + this.name + ' and I am from ' + this.countryOfOrigin;
+	},
 
-    addMedal: function (medals) {
-        medals.push('bronze');
-        return medals;
-    },
+	addMedal: function(medal) {
+		this.medals.push(medal);
+		return this.medals;
+	},
 
 };
-console.log(athlete1.introduce( athlete1.name, athlete1.countryOfOrigin ));
-console.log(athlete1.addMedal( athlete1.medals ));
+console.log(athlete1.introduce());
+console.log(athlete1.addMedal('bronze'));
 
 
 
@@ -100,25 +98,28 @@ console.log(athlete1.addMedal( athlete1.medals ));
 // https://github.com/galdamez/ca276-fall2013/blob/master/week8/prototypes.html
 
 function Athlete(name, height, age, countryOfOrigin, medals, isOlympian) {
-    this.name = name;
-    this.height = height;
-    this.age = age;
-    this.countryOfOrigin = countryOfOrigin;
-    this.medals = medals;
-    this.isOlympian = isOlympian;
-    this.introduce = function (name, countryOfOrigin) {
-        return ('Hello my name is ' + name + ' and I am from ' + countryOfOrigin);
-    };
-    this.addMedal = function (medals) {
-        medals.push('bronze');
-        return medals;
-    };
+	this.name = name;
+	this.height = height;
+	this.age = age;
+	this.countryOfOrigin = countryOfOrigin;
+	this.medals = medals;
+	this.isOlympian = isOlympian;
+	this.introduce = function() {
+		return 'Hello my name is ' + this.name + ' and I am from ' + this.countryOfOrigin;
+	};
+	this.addMedal = function(medal) {
+		medals.push(medal);
+		return this.medals;
+	};
 
 }
+
 var athlete1;
+
 athlete1 = new Athlete('John', '6\'1\"', 19, 'Brazil', ['gold', 'silver'], true)
-console.log(athlete1.introduce( athlete1.name, athlete1.countryOfOrigin ));
-console.log(athlete1.addMedal( athlete1.medals ));
+
+console.log(athlete1.introduce());
+console.log(athlete1.addMedal('bronze'));
 
 
 
@@ -149,29 +150,42 @@ console.log(athlete1.addMedal( athlete1.medals ));
 // 
 // s1.swim();
 
-function Athelete() {
-    this.name = 'athlete';
-    this.toString = function () {
-        return this.name;
-    }
+//JG: Need to keep this prototype separate from the one up top
+function Athlete2() {
+	this.name = 'athlete';
+	this.toString = function() {
+		return this.name;
+	}
+	//JG: These are missing
+	this.introduce = function() {
+		return 'Hello my name is ' + this.name + ' and I am from ' + this.countryOfOrigin;
+	};
+	this.addMedal = function(medal) {
+		medals.push(medal);
+		return this.medals;
+	};
+	//JG: I was expecting most of the properties to be here, but I think I see why they're missing
 }
 
 function TableTennisPlayer(name, height, age, countryOfOrigin, medals, isOlympian, brand) {
-    this.name = name;
-    this.height = height;
-    this.age = age;
-    this.countryOfOrigin = countryOfOrigin;
-    this.medals = medals;
-    this.isOlympian = isOlympian;
-    this.brand = brand;
-    this.swingPaddle = function () {
-        return 'swoosh, ping, pong';
-    }
+	//JG: It appears you placed the properties at the TableTennisPlayer level.
+	//JG: While the properties should be defined at the Athlete2 level, I understand I didn't cover
+	//JG: how to reference parent prototype properties.
+	this.name = name;
+	this.height = height;
+	this.age = age;
+	this.countryOfOrigin = countryOfOrigin;
+	this.medals = medals;
+	this.isOlympian = isOlympian;
+	this.brand = brand;
+	this.swingPaddle = function() {
+		return 'swoosh, ping, pong';
+	}
 }
 
 
-// Athelete -> Tennis Player
-TableTennisPlayer.prototype = new Athelete();
-TableTennisPlayer.prototype.constructor = Athelete;
+// Athlete -> Tennis Player
+TableTennisPlayer.prototype = new Athlete2();
+TableTennisPlayer.prototype.constructor = Athlete2;
 
 var s1 = new TableTennisPlayer("Vanessa", 1.7, 21, 'Vietnam', ['gold', 'silver', 'gold'], true, 'Paddle Palace');
