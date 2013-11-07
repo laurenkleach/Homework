@@ -150,33 +150,15 @@ console.log(athlete1.addMedal('bronze'));
 // 
 // s1.swim();
 
-//JG: Need to keep this prototype separate from the one up top
-function Athlete2() {
-	this.name = 'athlete';
-	this.toString = function() {
-		return this.name;
-	}
-	//JG: These are missing
-	this.introduce = function() {
-		return 'Hello my name is ' + this.name + ' and I am from ' + this.countryOfOrigin;
-	};
-	this.addMedal = function(medal) {
-		medals.push(medal);
-		return this.medals;
-	};
-	//JG: I was expecting most of the properties to be here, but I think I see why they're missing
-}
-
 function TableTennisPlayer(name, height, age, countryOfOrigin, medals, isOlympian, brand) {
-	//JG: It appears you placed the properties at the TableTennisPlayer level.
-	//JG: While the properties should be defined at the Athlete2 level, I understand I didn't cover
-	//JG: how to reference parent prototype properties.
-	this.name = name;
-	this.height = height;
-	this.age = age;
-	this.countryOfOrigin = countryOfOrigin;
-	this.medals = medals;
-	this.isOlympian = isOlympian;
+	//JG: I didnt' cover this in class, so I present it here.
+	//JG: To assign properties up the chain use the __proto__ property
+	this.__proto__.name = name;
+	this.__proto__.height = height;
+	this.__proto__.age = age;
+	this.__proto__.countryOfOrigin = countryOfOrigin;
+	this.__proto__.medals = medals;
+	this.__proto__.isOlympian = isOlympian;
 	this.brand = brand;
 	this.swingPaddle = function() {
 		return 'swoosh, ping, pong';
@@ -185,7 +167,7 @@ function TableTennisPlayer(name, height, age, countryOfOrigin, medals, isOlympia
 
 
 // Athlete -> Tennis Player
-TableTennisPlayer.prototype = new Athlete2();
-TableTennisPlayer.prototype.constructor = Athlete2;
+TableTennisPlayer.prototype = new Athlete();
+TableTennisPlayer.prototype.constructor = Athlete;
 
 var s1 = new TableTennisPlayer("Vanessa", 1.7, 21, 'Vietnam', ['gold', 'silver', 'gold'], true, 'Paddle Palace');
