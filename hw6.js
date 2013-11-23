@@ -119,6 +119,7 @@ the new row would go before it.
 // "bubble" towards the end.
 
 // 5) Remove the empty TBODY element from the DOM tree.
+var selectTbody, insertTable;
 
 var trNodeList = document.querySelectorAll('tr');
 var firstNames = [];
@@ -130,10 +131,12 @@ var idNumber = [];
 var i, j;
 var sortLastNames = lastNames;
 var sortFirstNames = firstNames;
+var sortidNumber = idNumber;
+var swapped = false;
 
 
 //store innerText into arrays 
-for (var i = 1; i < trNodeList.length; i++) {
+for (i = 1; i < trNodeList.length; i++) {
     lastNames.push(trNodeList[i].childNodes[5].innerText); //last names innerText
     firstNames.push(trNodeList[i].childNodes[3].innerText); //first names innerText
     idNumber.push(trNodeList[i].childNodes[1].innerText); //id numbers innerText
@@ -143,13 +146,16 @@ for (var i = 1; i < trNodeList.length; i++) {
 var swap = function (j, k) {
     var tempLast = sortLastNames[j]; 
     var tempFirst = sortFirstNames[j]
+    var tempId = sortidNumber[j]
     sortLastNames[j] = sortLastNames[k];
     sortLastNames[k] = tempLast;
     sortFirstNames[j] = sortFirstNames[k];
     sortFirstNames[k] = tempFirst;
+    sortidNumber[j] = sortidNumber[k];
+    sortidNumber[k] = tempId;
     return (true);
 }
-var swapped = false;
+
 for (i = 1; i < sortLastNames.length; i++) {
     for (j = 0; j < sortLastNames.length - i; j++) {
         if (sortLastNames[j + 1] < sortLastNames[j]) {
@@ -165,7 +171,7 @@ insertTable = document.getElementById("names");
 insertTable.innerHTML += ('<tbody id="secondTable"></tbody>');
 
 //insert each new TR into the new TBODY
-for (var i = 0; i < sortLastNames.length; i++) {
+for (i = 0; i < sortLastNames.length; i++) {
     insertTable = document.getElementById("secondTable");
     insertTable.innerHTML += ('<tr><td>' + idNumber[i] + '</td><td>' + firstNames[i] + '</td><td>' + lastNames[i] + ' </td>');
 
@@ -173,6 +179,6 @@ for (var i = 0; i < sortLastNames.length; i++) {
 
 
 //remove empty TBODY element
-var selectTbody = document.getElementsByTagName('tbody')[0];
+selectTbody = document.getElementsByTagName('tbody')[0];
 selectTbody.parentNode.removeChild(selectTbody);
 
