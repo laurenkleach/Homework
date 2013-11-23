@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+	<head>
+		<title>CA276</title>
+		<style type="text/css">
+			#wrapper { border-radius: 8px; border: 1px solid #333; margin: 10px auto; padding: 5px 20px; width: 400px; }
+			h2 { margin: 12px 0 4px 0; }
+			.hidden { display: none; }
+			.highlight { background-color: #ffff00; }
+			.zombie { background-color: #80ff80; }
+		</style>
+	</head>
+	<body>
+	<div id="wrapper">
+			<h2>Sample HTML</h2>
+			<p id="intro">This is an introduction.</p>
+			<p>We're learning about the <em>Document Object Model</em>, or <strong>DOM</strong>.</p>
+			<p> <!-- Empty paragraph with a space in it --></p> 
+			<p>This paragraph has an anchor link to the <a href="#table_header">table header</a>.</p>
+			<a id="zombie_hunter" href="#">Bring out the zombies</a>
+			<h2>Fast Food</h2>
+			<ol id="fast_food">
+				<li class="highlight">McDonald's</li>
+				<li class="highlight">Burger King</li>
+				<li class="hidden">In-N-Out</li>
+			</ol>
+			<h2>Movies</h2>
+			<ul id="movies">
+				<li>The Day After Tomorrow</li>
+				<li>The Dark Knight Rises</li>
+				<li class="hidden">Lion King 3D (The &lsquo;In Your Face&rsquo; Edition)</li>
+			</ul>
+			<h2>Companies</h2>
+			<ul id="companies">
+				<li><a href="http://disney.com">Disney</a></li>
+				<li><a href="http://apple.com">Apple</a></li>
+				<li><a href="http://microsoft.com">Microsoft</a></li>
+			</ul>
+			<form id="sample_form" class="hidden">
+				<label>Please enter a name to add</label>
+				<input id="first_name" name="first_name">
+				First Radio Button
+				<input type="radio" name="first_radio" checked> One
+				<input type="radio" name="first_radio"> Two
+				<input type="radio" name="first_radio"> Three<br>
+				Second Radio Button
+				<input type="radio" name="second_radio"> One
+				<input type="radio" name="second_radio"  checked> Two
+				<input type="radio" name="second_radio"> Three<br>
+				Third Radio Button
+				<input type="radio" name="third_radio"> One
+				<input type="radio" name="third_radio"> Two
+				<input type="radio" name="third_radio"  checked> Three<br>
+				Checkboxes
+				<input type="checkbox" name="checkbox1"> One
+				<input type="checkbox" name="checkbox1"> Two
+				<input type="checkbox" name="checkbox1"  checked> Three<br>
+			</form>
+			<h2 id="table_header" name="table_header">Below me there is a table</h2>
+			<table id="names" style="border: 1px solid #ccc;">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>John</td>
+						<td>Doe</td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>Betty</td>
+						<td>Boop</td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td>Billy</td>
+						<td>The Kid</td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td>George</td>
+						<td>Armani</td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td>George</td>
+						<td>Lopez</td>
+					</tr>
+					<tr>
+						<td>6</td>
+						<td>Sherlock</td>
+						<td>Holmes</td>
+					</tr>
+					<tr>
+						<td>7</td>
+						<td>Professor</td>
+						<td>Moriarty</td>
+					</tr>
+					<tr>
+						<td>8</td>
+						<td>Captain</td>
+						<td>America</td>
+					</tr>
+					<tr>
+						<td>9</td>
+						<td>Tony</td>
+						<td>Stark</td>
+					</tr>
+					<tr>
+						<td>10</td>
+						<td>Magic</td>
+						<td>Johnson</td>
+					</tr>
+				</tbody>
+			</table>
+			<p id="last_paragraph"><!-- No content to see here. Move along. --></p>
+			<form>
+				A form with no inputs is not a form at all!
+			</form>
+		</div>
+		<script src="hw6.js"></script>
+	</body>
+</html>
