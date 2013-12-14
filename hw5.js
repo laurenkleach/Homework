@@ -31,43 +31,34 @@
 
 // Inject onto page using the W3C API
 
-var definition, definitions, word, mask, definitionWord, definitionWordNode, definitionText, definitionTextNode ;
+var definition, definitions, word, dl, definitionWord, definitionWordNode, definitionText, definitionTextNode, defintions;
 
-definitionWord = 'Some word: ';
+definitionWord = 'Some word1: ';
 definitionWordNode = document.createTextNode(definitionWord);
 
 definitionText = ' Some definition.';
 definitionTextNode = document.createTextNode(definitionText);
 
-// Create mask
-mask = document.createElement('dl');
-mask.setAttribute('id', 'mask');
-mask.setAttribute('style', 'display: block;');
-
-// Append mask node to the page
-document.body.appendChild(mask);
+dl = document.createElement('dl');
 
 // Create word
 word = document.createElement('dt');
-word.setAttribute('id', 'word');
-word.setAttribute('style', 'display: block; float:left; font-weight:bold;');
 
 // Create definition
 definition = document.createElement('dd');
-definition.setAttribute('id', 'definition');
-definition.setAttribute('style', 'display: block;');
 
 // Attach text node to the word node
 word.appendChild(definitionWordNode);
+word.setAttribute('style', 'display:block; float:left; font-weight:bold;');
 
 // Attach text node to the definition node
 definition.appendChild(definitionTextNode);
 
-// Append word node to the page
-document.body.appendChild(word);
+dl.appendChild(word);
+dl.appendChild(definition);
 
 // Append definition node to the page
-document.body.appendChild(definition);
+document.body.appendChild(dl);
 
 
 
@@ -94,6 +85,4 @@ definitions.innerHTML += '<dl><dt style="display:block; float:left; font-weight:
 
 // Locate the parent container by way of a CSS selector
 $('#definitions')
-
-// Append HTML snippet 
-    .append('<dl><dt style="display:block; float:left; font-weight:bold;">Some word3:</dt><dd style="display:block;">Some definition3</dd><dl>');
+	.append('<dl><dt style="display:block; float:left; font-weight:bold;">Some word3:</dt><dd style="display:block;">Some definition3</dd><dl>');
