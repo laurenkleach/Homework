@@ -1,0 +1,332 @@
+<html lang="en">
+<head>
+</head>
+<body>
+    <meta charset="utf-8" />
+    <title>Week 10 - Form Validation</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+    <style type="text/css">
+        /*form styles*/
+        body {
+            font-family: 'Century Gothic', Helvetica, sans-serif;
+            font-size: 18px;
+        }
+
+        br {
+            clear: both;
+        }
+
+        form div,
+        input,
+        label,
+        select,
+        textarea {
+            display: block;
+            float: left;
+            font-weight: normal;
+        }
+
+        form div label,
+        form div input {
+            float: none;
+            display: inline;
+        }
+
+        form div,
+        label + input,
+        label + textarea,
+        label + select,
+        label + textarea {
+            margin-bottom: 15px;
+        }
+
+        form div br {
+            clear: none;
+        }
+
+        fieldset {
+            border: 0px;
+        }
+
+        input,
+        textarea {
+            font: 12px Helvetica, Arial;
+            color: DarkBlue;
+        }
+
+        input[type="text"] {
+            width: 250px;
+        }
+
+        input[type="email"] {
+            width: 175px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            padding-right: 5px;
+        }
+
+        legend {
+            font-size: 26px;
+            padding: 10px;
+        }
+
+        label {
+            width: 250px;
+            padding-left: 20px
+        }
+
+        a: visited {
+            color: Blue;
+        }
+
+        textarea {
+            display: inline;
+            height: 75px;
+            width: 250px;
+        }
+
+        #form_wrapper {
+            border: 1px solid Gray;
+            border-radius: 8px;
+            margin: 0 auto;
+            margin-bottom: 70px;
+            padding: 10px 15px;
+            width: 700px;
+        }
+
+        .hidden {
+            display: none;
+            text-align: center;
+        }
+
+        .dialog {
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 0;
+            margin: 0 auto 16px auto;
+            text-align: center;
+            width: 80%;
+        }
+
+        .warning {
+            background-color: LightPink;
+            color: DarkRed;
+        }
+
+        .status {
+            background-color: LightGreen;
+            color: Teal;
+            width: 70px;
+            margin-left: 10px;
+        }
+
+        #error {
+            background-color: LightPink;
+            border-radius: 4px;
+            color: DarkRed;
+            padding-top: 14px;
+            padding-bottom: 14px;
+            padding-right: 30px;
+            padding-left: 30px;
+            width: 290px;
+            margin-left: 175px;
+            border: 2px solid #CC0000;
+        }
+
+        #characters {
+            color: #45BA16;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        .charcount {
+            color: Teal;
+            width: 50px;
+            margin-left: 10px;
+            height: 30px;
+        }
+
+        #skills,
+        #meal {
+            width: 250px;
+        }
+
+        /*styles for datepicker widget*/
+        .ui-widget {
+            width: 250px;
+            border: black 2px solid;
+        }
+
+        .ui-widget-content {
+            width: 250px;
+            background-color: #FFF;
+            padding-right: auto;
+            padding-left: auto;
+        }
+
+        .ui-widget-header {
+            background-color: #ccc;
+            border-bottom: 2px solid black;
+        }
+
+        .ui-state-default {
+            border: 1px solid black;
+            display: block;
+            width: 25px;
+            text-align: center;
+            padding: 2px;
+            text-decoration: none;
+            color: #000;
+            background-color: #ccc;
+        }
+
+        .ui-helper-reset {
+            padding: 2px;
+        }
+
+        .ui-state-hover {
+            background-color: #E6E8E8;
+        }
+
+        .ui-datepicker-next {
+            float: right;
+            margin-right: 8px;
+        }
+
+        .ui-datepicker-next: hover, .ui-datepicker-prev: hover {
+            background-color: #ccc;
+            color: #fff;
+        }
+
+        .ui-datepicker-title {
+            text-align: center;
+            width: 100%;
+        }
+
+        .ui-datepicker-prev {
+            margin-left: 8px;
+        }
+
+        .ui-datepicker-today {
+            background-color: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="form_wrapper">
+        <form method="get" action="wk11.html">
+            <legend>Javascript Form Validation</legend>
+            <div id="error" class="hidden"></div>
+            <br>
+            <fieldset>
+
+
+                <label>Required fields(*)</label>
+                <br>
+                <br>
+
+                <label for="first_name">First name (*)</label>
+                <input type="text" id="first_name" name="first_name" placeholder="First">
+                <br>
+                <label for="last_name">Last name (*)</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Last">
+                <br>
+                <label id="age">Age</label>
+                <input type="text" name="age" placeholder="23">
+                <br>
+                <label for="text">Email (*)</label>
+                <input type="text" id="email" name="email" value="" placeholder="johndoe@gmail.com">
+                <br>
+                <label for="about_me">About me(*)</label>
+                <textarea id="about_me" onkeyup="charCount()" placeholder="Please write a few words about yourself here: (MAX 140 characters)."></textarea>
+                <div id="characters" class="charcount"></div>
+                <br>
+                <label for="website">Website(*)</label>
+                <input type="text" id="website" name="website" placeholder="www.mywebsitename.com">
+                <br>
+                <label for="homephone">Homephone(*)</label>
+                <input type="text" id="homephone" name="homephone" placeholder="xxx-xxx-xxxx">
+                <br>
+                <label for="cellphone">Cellphone(*)</label>
+                <input type="text" id="cellphone" name="cellphone" placeholder="xxx-xxx-xxxx">
+                <br>
+                <label for="experience">Experience level(*)</label>
+                <select id="experience" name="experience">
+                    <option value="">---Please select---</option>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate">Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                </select>
+                <br>
+                <label for="meal">Meal Preference(*)</label>
+                <div id="meal">
+                    <label>
+                        <input type="radio" name="meal" value="À la carte">À la carte</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="meal" value="Gluten intolerant meal">Gluten intolerant meal</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="meal" value="Kosher">Kosher</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="meal" value="Jain meal">Jain meal</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="meal" value="Muslim">Muslim</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="meal" value="Vegetarian">Vegetarian</label>
+                    <br>
+                    <label>
+                        <input type="radio" name="meal" value="Vegan">Vegan</label>
+                </div>
+                <br>
+                <label for="skills">Skills(*)</label>
+                <div id="skills">
+                    <label>
+                        <input type="checkbox" name="skills" value="HTML">HTML</label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="skills" value="CSS">CSS</label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="skills" value="JavaScript">JavaScript</label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="skills" value="jQuery">jQuery</label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="skills" value="Dojo">Dojo</label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="skills" value="Prototype">Prototype</label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="skills" value="Flash">Flash</label>
+                    <br>
+                    <label>
+                        <input type="checkbox" name="skills" value="Flex">Flex</label>
+                </div>
+                <br>
+                <label>Expected date of Arrival</label>
+                <input type="text" id="datepicker" name="arrivaldate">
+                <br>
+
+
+
+                <label>&nbsp;</label>
+            </fieldset>
+            <input type="submit" id="submit" value="Submit">
+            <br>
+        </form>
+    </div>
+ <script src="formfinal.js"></script>
+</body>
+</html>
