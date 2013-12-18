@@ -47,11 +47,12 @@ console.log(document.querySelectorAll('li:nth-child(2)'));
 
 // All elements that are empty
 
-console.log(document.querySelectorAll('*:empty'));
+//JG: Asterisk doesn't hurt, but it's not needed
+console.log(document.querySelectorAll(':empty'));
 
 // All elements that are checked
 
-console.log(document.querySelectorAll('*:checked'));
+console.log(document.querySelectorAll(':checked'));
 
 // All radio buttons
 
@@ -63,11 +64,11 @@ console.log(document.querySelectorAll('input[type="radio"]:checked'));
 
 // All TDs that represent the 2nd column in the table with ID "names"
 
-console.log(document.querySelectorAll('table#names td:nth-child(2)'));
+console.log(document.querySelectorAll('#names td:nth-child(2)'));
 
 // All elements with the class name "hidden" that are not form elements
 
-console.log(document.querySelectorAll('[class="hidden"]:not(form)'));
+console.log(document.querySelectorAll('.hidden:not(form)'));
 
 // All even TRs that are descendants of a TBODY
 
@@ -137,48 +138,46 @@ var swapped = false;
 
 //store innerText into arrays 
 for (i = 1; i < trNodeList.length; i++) {
-    lastNames.push(trNodeList[i].childNodes[5].innerText); //last names innerText
-    firstNames.push(trNodeList[i].childNodes[3].innerText); //first names innerText
-    idNumber.push(trNodeList[i].childNodes[1].innerText); //id numbers innerText
+	lastNames.push(trNodeList[i].childNodes[5].innerText); //last names innerText
+	firstNames.push(trNodeList[i].childNodes[3].innerText); //first names innerText
+	idNumber.push(trNodeList[i].childNodes[1].innerText); //id numbers innerText
 };
 
 //function to sort names alphabetically by last name
-var swap = function (j, k) {
-    var tempLast = sortLastNames[j]; 
-    var tempFirst = sortFirstNames[j]
-    var tempId = sortidNumber[j]
-    sortLastNames[j] = sortLastNames[k];
-    sortLastNames[k] = tempLast;
-    sortFirstNames[j] = sortFirstNames[k];
-    sortFirstNames[k] = tempFirst;
-    sortidNumber[j] = sortidNumber[k];
-    sortidNumber[k] = tempId;
-    return (true);
+var swap = function(j, k) {
+	var tempLast = sortLastNames[j];
+	var tempFirst = sortFirstNames[j];
+	var tempId = sortidNumber[j];
+	sortLastNames[j] = sortLastNames[k];
+	sortLastNames[k] = tempLast;
+	sortFirstNames[j] = sortFirstNames[k];
+	sortFirstNames[k] = tempFirst;
+	sortidNumber[j] = sortidNumber[k];
+	sortidNumber[k] = tempId;
+	return (true);
 }
 
 for (i = 1; i < sortLastNames.length; i++) {
-    for (j = 0; j < sortLastNames.length - i; j++) {
-        if (sortLastNames[j + 1] < sortLastNames[j]) {
-            swapped = swap(j, j + 1);
-        }
-    }
-    if (!swapped) break;
+	for (j = 0; j < sortLastNames.length - i; j++) {
+		if (sortLastNames[j + 1] < sortLastNames[j]) {
+			swapped = swap(j, j + 1);
+		}
+	}
 
+	if (!swapped) break;
 }
 
 //append new TBODY to the table
 insertTable = document.getElementById("names");
-insertTable.innerHTML += ('<tbody id="secondTable"></tbody>');
+insertTable.innerHTML += '<tbody id="secondTable"></tbody>';
 
 //insert each new TR into the new TBODY
 for (i = 0; i < sortLastNames.length; i++) {
-    insertTable = document.getElementById("secondTable");
-    insertTable.innerHTML += ('<tr><td>' + idNumber[i] + '</td><td>' + firstNames[i] + '</td><td>' + lastNames[i] + ' </td>');
-
+	insertTable = document.getElementById("secondTable");
+	insertTable.innerHTML += ('<tr><td>' + idNumber[i] + '</td><td>' + firstNames[i] + '</td><td>' + lastNames[i] + ' </td>');
 };
 
 
 //remove empty TBODY element
 selectTbody = document.getElementsByTagName('tbody')[0];
 selectTbody.parentNode.removeChild(selectTbody);
-
