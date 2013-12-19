@@ -20,7 +20,6 @@ function charCount() {
 }
 
 
-
 var form = document.querySelector('form');
 form.addEventListener('submit', function(e) {
 	var errors, errorDiv, errorStyle, errorHighlight, noErrorStyle, noHighlight, lightHighlight, namePattern, lnamePattern, skillsArray;
@@ -185,12 +184,7 @@ form.addEventListener('submit', function(e) {
 			this.noHighlight = document.getElementById(noErrorStyle[i]);
 			this.noHighlight.style.border = '#999 1px solid';
 		}
-
-
-
 	};
-
-
 
 	//If any inputs failed prevent form submit
 	if (errors.length > 0) {
